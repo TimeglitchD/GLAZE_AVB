@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4996422012058293461}
   - component: {fileID: 2800265631558777998}
   - component: {fileID: 1599955983493094034}
-  - component: {fileID: 3897263334046706138}
+  - component: {fileID: 7212187019583889338}
   m_Layer: 0
   m_Name: coin
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b3e6c04a4cfc094cb6f7dac8941c5c5, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8865544
   m_Center: {x: 0.025291843, y: 0, z: 0}
---- !u!114 &3897263334046706138
+--- !u!114 &7212187019583889338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,8 +103,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8520214822111582599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f7bb307589badc4781457a51c58d5a9, type: 3}
+  m_Script: {fileID: 11500000, guid: d2275927fb5f4214192cccb5c46da81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
+  value: 1
   rotationSpeed: 5

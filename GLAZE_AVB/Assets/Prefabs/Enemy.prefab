@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1032692160010719974}
   - component: {fileID: 1032692160010719975}
   - component: {fileID: 1032692160010719972}
-  - component: {fileID: 1032692160010719976}
+  - component: {fileID: 3300351227905154482}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13ee9fa592608064ba77e00497324526, type: 2}
+  - {fileID: 2100000, guid: ba97d436f0041cf438f77e7bcf300690, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1032692160010719976
+--- !u!114 &3300351227905154482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,9 +104,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032692160010719973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7ec83e69207dd4aa2e18b98c3382cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f3a0413bfbe1c740b2d3a454f12ef53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  coinPrefab: {fileID: 8520214822111582599, guid: 2941ff1c65d262447a5524717453649a,
+  coinPrefab: {fileID: 8520214822111582599, guid: ddd1bfbd9ee800641890b009825d83f7,
     type: 3}

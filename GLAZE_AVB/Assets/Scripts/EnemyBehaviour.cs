@@ -25,13 +25,13 @@ public class EnemyBehaviour : MonoBehaviour
         startPosition = transform.position;
         gmc = FindObjectOfType<GameManager>();
     }
-    public void SetTarget(Transform target)
+    public void SetTarget(Transform target, Transform returnToDirection)
     {
         // provide the enemy with the target to move to (this gives possibility to diversify direction too)
+        // startPosition = returnToDirection.position;
         startPosition = transform.position;
         targetPosition = target.position;
         hasDirection = true; //Flag it to go moving if there is a target selected
-        
     }
 
     // Update is called once per frame
