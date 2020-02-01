@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private List<PartBehavior> parts = new List<PartBehavior>();
+    public static Inventory _instance;
 
-    // Start is called before the first frame update
+    private int coins = 0;
+
+    private int caughtwallparts = 0;
+
+    private int _wallpart;
+    public int wallpart
+    {
+        get { return _wallpart; }
+    }
+
     void Start()
     {
-        PartBehavior[] partsArray = gameObject.GetComponentsInChildren<PartBehavior>();
-        for(int i=0; i<partsArray.Length; i++)
+        _instance = this;
+    }
+
+    public void BuyWallPart()
+    {
+
+    }
+
+    public bool PayCost(int cost)
+    {
+        if(cost < _wallpart)
         {
-            parts.Add(partsArray[i]);
+            _wallpart -= cost;
+            return true;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void BuyComponents()
-    {
-
-    }
-
-    public void RepairComponents()
-    {
-
+        return false;
     }
 }
