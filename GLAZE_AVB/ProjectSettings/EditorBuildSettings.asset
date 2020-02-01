@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 83b754ea640fbc047b93d0e49c782282
   - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: e17528e839ed89c40aa5cb1fee608d44
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: f5bcac65710588c408b478ef69d3110e
+  - enabled: 1
     path: Assets/Scenes/UIScene.unity
     guid: f5fc8a07e0247e440bec70ca473d7365
   - enabled: 1

@@ -7,11 +7,14 @@ public enum inputMode { attack, repair, build }
 public enum gameState {  menu, playing, pause, died }
 public class GameManager : MonoBehaviour
 {
+    private gameState currentState = gameState.menu;
+
     public static GameManager _instance;
     [SerializeField]inputMode ModeSelector;
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
     [SerializeField] int Points, Coins, Parts;
     int timeActive;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,45 +22,82 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1, LoadSceneMode.Additive);  // Load Menu
     }
 
+    // Loading the level
     public void LoadLevel()
     {
-        StartCoroutine(LoadingLevel(3));
+        StartCoroutine(LoadingLevel(5));
     }
 
     IEnumerator LoadingLevel(int level)
     {
-        yield return new WaitForSeconds(0.2f);
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
         SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        currentState = gameState.playing;
+        yield return new WaitForSeconds(0.2f);
         SceneManager.UnloadSceneAsync(1);
     }
 
-    public void UnloadLevel(int level)
+    // Pause menu stuff
+    private bool pause = false;
+    public void PauseGame()
     {
-        SceneManager.UnloadSceneAsync(2);
+        if (pause) return;
+        currentState = gameState.pause;
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        pause = true;
+    }
+
+    public void UnloadPauseMenu()
+    {
+        currentState = gameState.playing;
+        SceneManager.UnloadSceneAsync(3);
+        pause = false;
+    }
+
+    public void EndLevelPauseMenu()
+    {
+        SceneManager.UnloadSceneAsync(3);
+        StartCoroutine(LoadEndGame(5));
+    }
+
+    // End level stuff
+
+    public void EndLevel()
+    {
+        StartCoroutine(LoadEndGame(5));
+    }
+
+    IEnumerator LoadEndGame(int level)
+    {
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        currentState = gameState.died;
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.UnloadSceneAsync(4);
         SceneManager.UnloadSceneAsync(level);
-        StartCoroutine("LoadMenu");
     }
 
     IEnumerator LoadMenu()
     {
         yield return new WaitForSeconds(0.2f);
+        currentState = gameState.menu;
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
 
-    public void addPoints(int pointsToAdd)
-    {
-        Points += pointsToAdd;
-    }
-
+    // input mode
     public inputMode getMode()
     {
         return ModeSelector;
     }
+    // Point stuff
     public int getPoints()
     {
         return Points;
     }
+    public void addPoints(int pointsToAdd)
+    {
+        Points += pointsToAdd;
+    }
+    // Coin stuff
     public int getCoins()
     {
         return Coins;
@@ -70,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
         Coins -= value;
     }
+    // Part stuff
     public int getParts()
     {
         return Parts;
@@ -97,6 +138,11 @@ public class GameManager : MonoBehaviour
         else
         {
              ModeSelector = inputMode.attack;
+        }
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            PauseGame();
         }
     }
 }
