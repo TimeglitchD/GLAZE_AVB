@@ -105,7 +105,7 @@ public class EnemySpawnManager : MonoBehaviour
         roundstarted = true;
 
         // Find the current round
-        if (currentRoundNr > rounds.Count) currentRoundNr = 0;
+        if (currentRoundNr >= rounds.Count) currentRoundNr = 0;
         Round currentRound = rounds[currentRoundNr];
         Debug.Log("Current round " + currentRoundNr);
 
