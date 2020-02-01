@@ -16,9 +16,35 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         timeActive = Mathf.RoundToInt(Time.timeSinceLevelLoad);
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);  // Load Menu
     }
+
+    public void LoadLevel()
+    {
+        StartCoroutine(LoadingLevel(3));
+    }
+
+    IEnumerator LoadingLevel(int level)
+    {
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(1);
+    }
+
+    public void UnloadLevel(int level)
+    {
+        SceneManager.UnloadSceneAsync(2);
+        SceneManager.UnloadSceneAsync(level);
+        StartCoroutine("LoadMenu");
+    }
+
+    IEnumerator LoadMenu()
+    {
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+    }
+
     public void addPoints(int pointsToAdd)
     {
         Points += pointsToAdd;

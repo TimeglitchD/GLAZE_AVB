@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgObject: {fileID: 3550378027009520636}
+  Repairclip: {fileID: 8300000, guid: 8f570a54c3498b44bbf2b562ade778b9, type: 3}
   repairTimer: 2
   buildTimer: 4
   buildCost: 3
