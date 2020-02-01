@@ -81,7 +81,7 @@ public class EnemyBehaviour : MonoBehaviour
         
         gmc.addPoints(10);
         this.gameObject.SetActive(false);
-        Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Instantiate(coinPrefab, new Vector3(transform.position.x,1f,transform.position.z), Quaternion.identity);
         ///
     }
 }
