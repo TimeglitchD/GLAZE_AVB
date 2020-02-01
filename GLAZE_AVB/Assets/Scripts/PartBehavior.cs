@@ -55,19 +55,20 @@ public class PartBehavior : MonoBehaviour
         // Check if able to repair
         if (Inventory._instance.PayCost(repairCost))
         {
+            Debug.Log("Start repairing");
             _timer = 0;
             repairing = true;
-        }
+        } else { Debug.Log("Cost too high!"); }
     }
 
     // For buying or recollecting part
-    public void BuyPart()
+    public void BuildPart()
     {
         // Check if able to repair
         if (Inventory._instance.PayCost(buildCost))
         {
             _timer = 0;
-            repairing = true;
+            building = true;
         }
     }
 
@@ -90,8 +91,7 @@ public class PartBehavior : MonoBehaviour
         {
             imgObject.SetActive(true);
             wallcollider.isTrigger = false;
-            Debug.Log("Repair!");
+            RepairPart();
         }
-
     }
 }

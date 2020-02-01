@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool hasDirection = false;
     private bool goBack = false;
     GameManager gmc;
+
     // Make the enemy move towards direction
     public void StartMoving()
     {
