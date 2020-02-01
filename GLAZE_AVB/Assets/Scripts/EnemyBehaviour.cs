@@ -48,9 +48,10 @@ public class EnemyBehaviour : MonoBehaviour
         if(collision.gameObject.CompareTag("Wall"))
         {
             PartBehavior wallCode = collision.gameObject.GetComponent<PartBehavior>();
-            if (wallCode != null) wallCode.StealPart();
-
-            goBack = true;
+            if (wallCode != null)
+            {
+                if (wallCode.StealPart()) goBack = true;
+            }
         }
 
         if (collision.gameObject.CompareTag("Core"))
