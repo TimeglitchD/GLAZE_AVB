@@ -51,6 +51,7 @@ public class PartBehavior : MonoBehaviour
         state--;
 
         sprRenderer.sprite = states[state];
+        Debug.Log("State: " + state);
 
         return true;
     }
@@ -65,12 +66,8 @@ public class PartBehavior : MonoBehaviour
         // Check if able to repair
         if (Inventory._instance.PayCost(repairCost))
         {
-            Debug.Log("Start repairing");
             _timer = 0;
             repairing = true;
-        }
-        else {
-            Debug.Log("Cost too high!");
         }
     }
 

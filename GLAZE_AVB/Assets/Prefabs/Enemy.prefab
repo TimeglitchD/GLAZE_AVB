@@ -111,6 +111,8 @@ MonoBehaviour:
   speed: 1.4
   coinPrefab: {fileID: 8520214822111582599, guid: ddd1bfbd9ee800641890b009825d83f7,
     type: 3}
+  partPrefab: {fileID: 8282214555292055808, guid: 90e4dd8fd915d82469d6a98615067cfc,
+    type: 3}
 --- !u!1 &4300559860104365077
 GameObject:
   m_ObjectHideFlags: 0
