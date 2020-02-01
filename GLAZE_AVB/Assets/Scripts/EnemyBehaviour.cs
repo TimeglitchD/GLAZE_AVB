@@ -13,11 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool hasDirection = false;
     private bool goBack = false;
     GameManager gmc;
-<<<<<<< HEAD
-    bool spawnedcoin;
-=======
 
->>>>>>> c2c84eddc2a28a73fb4624ed25eca15e219d2504
     // Make the enemy move towards direction
     public void StartMoving()
     {
@@ -85,23 +81,14 @@ public class EnemyBehaviour : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log("Attacked enemy");
         if (gmc.getMode() == inputMode.attack)
         {
-
             gmc.addPoints(10);
-            Invoke("spawnCoin",1f);
             this.gameObject.SetActive(false);
-            
+            Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
         }
     }
 
-    void spawnCoin()
-    {
-        spawnedcoin = true;
-       
-        Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
-    }
     void SelectSpriteDirection()
     {
         //if currentpos lower than 
