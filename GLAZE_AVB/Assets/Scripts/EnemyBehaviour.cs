@@ -44,7 +44,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("what?");
         if(collision.gameObject.CompareTag("Wall"))
         {
             PartBehavior wallCode = collision.gameObject.GetComponent<PartBehavior>();
@@ -56,7 +55,8 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Core"))
         {
-            Debug.Log("Hits core");
+            gmc.HealthDown(1);
+            this.gameObject.SetActive(false);
         }
     }
     void Move()
