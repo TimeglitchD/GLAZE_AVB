@@ -69,14 +69,5 @@ public class PartBehavior : MonoBehaviour
             repairing = false;
         }
     }
-    private void OnMouseDown()
-    {
-        if (gmc.getMode() == inputMode.repair)
-        {
-            imgObject.SetActive(true);
-            wallcollider.isTrigger = false;
-            Debug.Log("Repair!");
-        }
-        
-    }
+    
 }
