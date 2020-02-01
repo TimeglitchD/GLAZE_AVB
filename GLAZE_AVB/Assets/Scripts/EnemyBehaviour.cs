@@ -45,7 +45,7 @@ public class EnemyBehaviour : MonoBehaviour
         Debug.Log("what?");
         if(collision.gameObject.CompareTag("Wall"))
         {
-            WallBehavior wallCode = collision.gameObject.GetComponent<WallBehavior>();
+            PartBehavior wallCode = collision.gameObject.GetComponent<PartBehavior>();
             if (wallCode != null) wallCode.StealPart();
 
             goBack = true;
@@ -80,10 +80,13 @@ public class EnemyBehaviour : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (gmc.getMode() == inputMode.attack)
+        {
+            gmc.addPoints(10);
+            this.gameObject.SetActive(false);
+            Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
+        }
         
-        gmc.addPoints(10);
-        this.gameObject.SetActive(false);
-        Instantiate(coinPrefab, new Vector3(transform.position.x,1f,transform.position.z), Quaternion.identity);
         ///
     }
 

@@ -10,7 +10,7 @@ public class PartBehavior : MonoBehaviour
     private bool repairing = false;
     [SerializeField] private float repairTimer = 2f;
     private float timer = 0;
-
+    GameManager gmc;
     [SerializeField] private int cost = 10;
     private bool hasComponents = false;
 
@@ -18,6 +18,7 @@ public class PartBehavior : MonoBehaviour
     void Start()
     {
         wallcollider = gameObject.GetComponent<Collider>();
+        gmc = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -33,7 +34,8 @@ public class PartBehavior : MonoBehaviour
     public void StealPart()
     {
         imgObject.SetActive(false);
-        wallcollider.enabled = false;
+        wallcollider.isTrigger = true;
+        //wallcollider.enabled = false;
         Debug.Log("Collide with wall");
     }
 
@@ -66,5 +68,15 @@ public class PartBehavior : MonoBehaviour
             hasComponents = false;
             repairing = false;
         }
+    }
+    private void OnMouseDown()
+    {
+        if (gmc.getMode() == inputMode.repair)
+        {
+            imgObject.SetActive(true);
+            wallcollider.isTrigger = false;
+            Debug.Log("Repair!");
+        }
+        
     }
 }
