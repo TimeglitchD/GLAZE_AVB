@@ -9,7 +9,11 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PartBehavior[] partsArray = gameObject.GetComponentsInChildren<PartBehavior>();
+        for(int i=0; i<partsArray.Length; i++)
+        {
+            parts.Add(partsArray[i]);
+        }
     }
 
     // Update is called once per frame
