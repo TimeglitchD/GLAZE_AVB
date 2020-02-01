@@ -87,8 +87,6 @@ public class EnemyBehaviour : MonoBehaviour
             this.gameObject.SetActive(false);
             Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
         }
-        
-        ///
     }
 
     void SelectSpriteDirection()

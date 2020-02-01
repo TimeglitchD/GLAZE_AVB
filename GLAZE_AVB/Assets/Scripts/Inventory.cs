@@ -6,31 +6,35 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory _instance;
 
+    private GameManager gmc;
+
     private int coins = 0;
 
+    [SerializeField] private int wallpartcost = 5;
     private int caughtwallparts = 0;
 
-    private int _wallpart;
-    public int wallpart
-    {
-        get { return _wallpart; }
-    }
+    private int wallparts;
 
     void Start()
     {
         _instance = this;
+        gmc = FindObjectOfType<GameManager>();
     }
 
     public void BuyWallPart()
     {
-
+        if(gmc.getCoins() > wallpartcost)
+        {
+            wallparts++;
+            gmc.removeCoin(wallpartcost);
+        }
     }
 
     public bool PayCost(int cost)
     {
-        if(cost < _wallpart)
+        if(cost < wallparts)
         {
-            _wallpart -= cost;
+            wallparts -= cost;
             return true;
         }
         return false;

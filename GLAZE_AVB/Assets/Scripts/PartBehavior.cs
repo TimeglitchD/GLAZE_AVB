@@ -52,6 +52,11 @@ public class PartBehavior : MonoBehaviour
     // Start repairing
     public void RepairPart()
     {
+        if (state == 0) return; // If wall needs to be rebuild
+
+        imgObject.SetActive(true);
+        wallcollider.isTrigger = false;
+
         // Check if able to repair
         if (Inventory._instance.PayCost(repairCost))
         {
@@ -64,6 +69,11 @@ public class PartBehavior : MonoBehaviour
     // For buying or recollecting part
     public void BuildPart()
     {
+        if (state != 0) return; // If wall needs to be repaired
+
+        imgObject.SetActive(true);
+        wallcollider.isTrigger = false;
+
         // Check if able to repair
         if (Inventory._instance.PayCost(buildCost))
         {
@@ -89,9 +99,11 @@ public class PartBehavior : MonoBehaviour
     {
         if (gmc.getMode() == inputMode.repair)
         {
-            imgObject.SetActive(true);
-            wallcollider.isTrigger = false;
             RepairPart();
+        }
+        if(gmc.getMode() == inputMode.build)
+        {
+            BuildPart();
         }
     }
 }

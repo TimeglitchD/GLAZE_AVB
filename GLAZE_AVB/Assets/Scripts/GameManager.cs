@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum inputMode { attack, repair }
+public enum inputMode { attack, repair, build }
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;
@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
     {
         Coins += value;
     }
+    public void removeCoin(int value)
+    {
+        Coins -= value;
+    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +50,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             ModeSelector = inputMode.repair;
+        }
+        if(Input.GetKey(KeyCode.D))
+        {
+            ModeSelector = inputMode.build;
         }
         else
         {
