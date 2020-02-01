@@ -8,8 +8,6 @@ public class Inventory : MonoBehaviour
 
     private GameManager gmc;
 
-    private int coins = 0;
-
     private int wallparts = 5;
     [SerializeField] private int wallpartcost = 5;
 
@@ -23,16 +21,16 @@ public class Inventory : MonoBehaviour
     {
         if(gmc.getCoins() > wallpartcost)
         {
-            wallparts++;
+            gmc.addPart(1);
             gmc.removeCoin(wallpartcost);
         }
     }
 
     public bool PayCost(int cost)
     {
-        if(cost < wallparts)
+        if(cost < gmc.getParts())
         {
-            wallparts -= cost;
+            gmc.removePart(cost);
             return true;
         }
         return false;
