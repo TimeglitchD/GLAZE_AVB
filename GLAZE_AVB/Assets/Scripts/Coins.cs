@@ -6,6 +6,7 @@ public class Coins : MonoBehaviour
 {
     [SerializeField]int value;
     [Range(1f,100f)][SerializeField]float rotationSpeed=5f;
+    [SerializeField] AudioClip collectClip;
     GameManager gmc;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class Coins : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        AudioSource.PlayClipAtPoint(collectClip, transform.position);
         gmc.addCoin(value);
         Destroy(this.gameObject);
     }

@@ -190,3 +190,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 1
   rotationSpeed: 5
+  collectClip: {fileID: 8300000, guid: 96e3d41d5178d0e4fac9ac3049a84dfe, type: 3}
