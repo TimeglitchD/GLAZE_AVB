@@ -22,23 +22,11 @@ public class EnemySpawnManager : MonoBehaviour
     private float timeBeforeNextEnemy = 1;
 
     private bool roundstarted = false;
-    private void Awake()
-    {
-        if (FindObjectsOfType<EnemySpawnManager>().Length > 0)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            SpawnEnemyManager = this;
-        }
-        
-
-
-    }
+    
     // Start is called before the first frame update
     void Start()
     {
+        SpawnEnemyManager = this;
         enemyPool = new List<GameObject>();
 
         // Grab spawn positions (remove parent transform)
