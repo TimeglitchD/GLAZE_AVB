@@ -189,5 +189,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
-  rotationSpeed: 0
-  pickupClip: {fileID: 8300000, guid: a85636e200265f64cbef58514f776dc9, type: 3}
+  rotationSpeed: 5
