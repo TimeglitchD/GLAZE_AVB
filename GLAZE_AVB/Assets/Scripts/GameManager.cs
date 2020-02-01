@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]inputMode ModeSelector;
     
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
-    [SerializeField] int Points, Coins, Parts, health;
+    [SerializeField] int Points, Coins, Parts;
+    [SerializeField] int health = 3;
     int timeActive;
     
     // Start is called before the first frame update
