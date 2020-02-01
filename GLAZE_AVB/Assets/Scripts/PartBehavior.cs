@@ -92,9 +92,10 @@ public class PartBehavior : MonoBehaviour
     // Buy wall
     public void Building(float timer)
     {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
         if (_timer > timer)
         {
+            Debug.Log("Repaired");
             state = 3;
             sprRenderer.sprite = states[state];
             wallcollider.isTrigger = true;
