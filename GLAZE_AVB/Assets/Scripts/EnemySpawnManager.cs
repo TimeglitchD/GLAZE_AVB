@@ -8,7 +8,8 @@ public class EnemySpawnManager : MonoBehaviour
 
     [SerializeField] private Transform moveEnemyIntoDirection;
     [SerializeField] private Transform enemySpawnPositions;
-    private Transform[] spawnPositions;
+    private Transform[] spawnPositionsArray;
+    private List<Transform> spawnPositions;
     [SerializeField] private Transform enemySpawnParent;
 
     private List<GameObject> enemyPool;
@@ -28,7 +29,13 @@ public class EnemySpawnManager : MonoBehaviour
         SpawnEnemyManager = this;
         enemyPool = new List<GameObject>();
 
-        spawnPositions = enemySpawnPositions.GetComponentsInChildren<Transform>();
+        // Grab spawn positions (remove parent transform)
+        spawnPositionsArray = enemySpawnPositions.GetComponentsInChildren<Transform>();
+        spawnPositions = new List<Transform>();
+        for(int i=1; i<spawnPositionsArray.Length; i++)
+        {
+            spawnPositions.Add(spawnPositionsArray[i]);
+        }
     }
 
     // Update is called once per frame
@@ -60,7 +67,7 @@ public class EnemySpawnManager : MonoBehaviour
             if (behaviour != null) behaviour.StartMoving();
 
             // Set next timer time
-            timeBeforeNextEnemy = Random.Range(.5f, 2f);
+            timeBeforeNextEnemy = Random.Range(2.5f, 5f);
             currentEnemyIndex--;
         }
 
@@ -98,8 +105,9 @@ public class EnemySpawnManager : MonoBehaviour
         roundstarted = true;
 
         // Find the current round
-        if (currentRoundNr < rounds.Count) currentRoundNr = 0;
+        if (currentRoundNr > rounds.Count) currentRoundNr = 0;
         Round currentRound = rounds[currentRoundNr];
+        Debug.Log("Current round " + currentRoundNr);
 
         // Clean up last round
         foreach(GameObject child in enemyPool)
@@ -129,15 +137,17 @@ public class EnemySpawnManager : MonoBehaviour
     {
         GameObject newBasicEnemy = Instantiate(prefab, enemySpawnParent);
 
-        // Set enemy to random position
-        int randomEnemyPosition = Random.Range(0, spawnPositions.Length);
+        // Random spawn position
+        int randomEnemyPosition = Random.Range(0, spawnPositions.Count);
         newBasicEnemy.transform.position = spawnPositions[randomEnemyPosition].position;
 
-        // Setup enemy directions
-        randomEnemyPosition = Random.Range(0, spawnPositions.Length);
+        // Random return position
+        randomEnemyPosition = Random.Range(0, spawnPositions.Count);
         Transform returnPosition = spawnPositions[randomEnemyPosition];
+
+        // Setup enemy spawn and return positions
         EnemyBehaviour enemyScript = newBasicEnemy.GetComponent<EnemyBehaviour>();
-        if (enemyScript != null) enemyScript.SetTarget(moveEnemyIntoDirection);
+        if (enemyScript != null) enemyScript.SetTarget(moveEnemyIntoDirection, returnPosition);
 
         enemyPool.Add(newBasicEnemy);
         newBasicEnemy.SetActive(false);
