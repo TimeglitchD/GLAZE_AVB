@@ -37,7 +37,6 @@ public class PartBehavior : MonoBehaviour
         if(repairing)
         {
             Building(repairTimer);
-            AudioSource.PlayClipAtPoint(Repairclip,transform.position);
         }
         if (building)
         {
@@ -69,6 +68,7 @@ public class PartBehavior : MonoBehaviour
         {
             _timer = 0;
             repairing = true;
+            AudioSource.PlayClipAtPoint(Repairclip, transform.position);
         }
     }
 
