@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
     public void BuyWallPart()
     {
-        if(gmc.getCoins() > wallpartcost)
+        if(gmc.getCoins() >= wallpartcost)
         {
             gmc.addPart(1);
             gmc.removeCoin(wallpartcost);
@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     public bool PayCost(int cost)
     {
-        if(cost < gmc.getParts())
+        if(cost <= gmc.getParts())
         {
             gmc.removePart(cost);
             return true;
