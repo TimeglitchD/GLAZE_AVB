@@ -5,17 +5,18 @@ using UnityEngine.UI;
 public class CoinsDisplay : MonoBehaviour
 {
     Text text;
-   // GameManager gmc;
+    GameManager gmc;
+
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<Text>();
-       // gmc = FindObjectOfType<GameManager>();
+        gmc = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.text = GameManager._instance.getCoins().ToString();   
+        text.text = gmc.getCoins().ToString();   
     }
 }

@@ -19,14 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (FindObjectsOfType<GameManager>().Length > 0)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        
     }
     // Start is called before the first frame update
     void Start()
