@@ -109,6 +109,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgObject: {fileID: 3550378027009520636}
+  repairTimer: 2
+  buildTimer: 4
+  buildCost: 3
+  repairCost: 1
+  states:
+  - {fileID: 21300000, guid: 7b8610ef4ff7d954bb6b39deb4f46cfe, type: 3}
+  - {fileID: 21300000, guid: 7c15030535b898a44a9c0c45d4074664, type: 3}
+  - {fileID: 21300000, guid: 3f272c6c084306549bc49ac9947325f5, type: 3}
+  - {fileID: 21300000, guid: 4949465aa5ad07c4aa2688bc55710782, type: 3}
 --- !u!54 &2171626692059251889
 Rigidbody:
   m_ObjectHideFlags: 0

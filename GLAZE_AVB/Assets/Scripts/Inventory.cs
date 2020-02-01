@@ -10,10 +10,8 @@ public class Inventory : MonoBehaviour
 
     private int coins = 0;
 
+    private int wallparts = 15;
     [SerializeField] private int wallpartcost = 5;
-    private int caughtwallparts = 0;
-
-    private int wallparts;
 
     void Start()
     {

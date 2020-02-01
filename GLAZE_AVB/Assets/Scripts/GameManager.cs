@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             ModeSelector = inputMode.repair;
         }
-        if(Input.GetKey(KeyCode.D))
+        else if(Input.GetKey(KeyCode.D))
         {
             ModeSelector = inputMode.build;
         }
