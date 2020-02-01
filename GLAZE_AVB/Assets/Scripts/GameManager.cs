@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum inputMode { attack, repair }
+public enum inputMode { attack, repair, build }
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;
     [SerializeField]inputMode ModeSelector;
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
-    [SerializeField] int Points, Coins;
+    [SerializeField] int Points, Coins, Parts;
     int timeActive;
     // Start is called before the first frame update
     void Start()
@@ -39,6 +39,22 @@ public class GameManager : MonoBehaviour
     {
         Coins += value;
     }
+    public void removeCoin(int value)
+    {
+        Coins -= value;
+    }
+    public int getParts()
+    {
+        return Parts;
+    }
+    public void addPart(int value)
+    {
+        Parts += value;
+    }
+    public void removePart(int value)
+    {
+        Parts -= value;
+    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +62,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             ModeSelector = inputMode.repair;
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            ModeSelector = inputMode.build;
         }
         else
         {

@@ -18,7 +18,7 @@ public class Coins : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 1f*rotationSpeed, 0));
     }
-    private void OnMouseOver()
+    private void OnMouseDown()
     {
         gmc.addCoin(value);
         Destroy(this.gameObject);

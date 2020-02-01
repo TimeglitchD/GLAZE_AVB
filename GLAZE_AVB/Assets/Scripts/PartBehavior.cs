@@ -9,15 +9,25 @@ public class PartBehavior : MonoBehaviour
 
     private bool repairing = false;
     [SerializeField] private float repairTimer = 2f;
-    private float timer = 0;
-    GameManager gmc;
-    [SerializeField] private int cost = 10;
-    private bool hasComponents = false;
+    private bool building = false;
+    [SerializeField] private float buildTimer = 4f;
+    private float _timer = 0;
+
+    [SerializeField] private int buildCost = 3;
+    [SerializeField] private int repairCost = 1;
+
+    private int state = 3;
+    private SpriteRenderer sprRenderer;
+    [SerializeField] private List<Sprite> states = new List<Sprite>();
+
+    private GameManager gmc;
 
     // Start is called before the first frame update
     void Start()
     {
         wallcollider = gameObject.GetComponent<Collider>();
+        sprRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        sprRenderer.sprite = states[state];
         gmc = FindObjectOfType<GameManager>();
     }
 
@@ -26,57 +36,80 @@ public class PartBehavior : MonoBehaviour
     {
         if(repairing)
         {
-            Repairing();
+            Building(repairTimer);
+        }
+        if (building)
+        {
+            Building(buildTimer);
         }
     }
 
     // Enemy steals part
-    public void StealPart()
+    public bool StealPart()
     {
-        imgObject.SetActive(false);
-        wallcollider.isTrigger = true;
-        //wallcollider.enabled = false;
-        Debug.Log("Collide with wall");
-    }
+        if (state == 0) return false;
+        state--;
 
-    // What does this part cost to buy?
-    public int FindCostPart()
-    {
-        return cost;
-    }
+        sprRenderer.sprite = states[state];
+        Debug.Log("State: " + state);
 
-    // For buying or recollecting part
-    public void ReturnPart()
-    {
-        hasComponents = true;
+        return true;
     }
 
     // Start repairing
     public void RepairPart()
     {
-        if(hasComponents) repairing = true;
+        if (state == 0) return; // If wall needs to be rebuild
+
+        wallcollider.isTrigger = false;
+
+        // Check if able to repair
+        if (Inventory._instance.PayCost(repairCost))
+        {
+            _timer = 0;
+            repairing = true;
+        }
     }
 
-    // Count time until repaired
-    public void Repairing()
+    // For buying or recollecting part
+    public void BuildPart()
     {
-        timer += Time.deltaTime;
-        if (timer > repairTimer)
+        if (state != 0) return; // If wall needs to be repaired
+
+        wallcollider.isTrigger = false;
+
+        // Check if able to repair
+        if (Inventory._instance.PayCost(buildCost))
         {
-            imgObject.SetActive(true);
-            wallcollider.enabled = true;
-            hasComponents = false;
+            _timer = 0;
+            building = true;
+        }
+    }
+
+    // Buy wall
+    public void Building(float timer)
+    {
+        _timer += Time.deltaTime;
+        if (_timer > timer)
+        {
+            Debug.Log("Repaired");
+            state = 3;
+            sprRenderer.sprite = states[state];
+            wallcollider.isTrigger = true;
             repairing = false;
         }
     }
+
+    // Capture mouse
     private void OnMouseDown()
     {
         if (gmc.getMode() == inputMode.repair)
         {
-            imgObject.SetActive(true);
-            wallcollider.isTrigger = false;
-            Debug.Log("Repair!");
+            RepairPart();
         }
-        
+        if(gmc.getMode() == inputMode.build)
+        {
+            BuildPart();
+        }
     }
 }
