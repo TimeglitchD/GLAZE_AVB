@@ -2384,6 +2384,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallPart
       objectReference: {fileID: 0}
+    - target: {fileID: 6840154742222161804, guid: 8553d1fdde01ed5448b063d4c1ee1f60,
+        type: 3}
+      propertyPath: states.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 75135b49a05b1064c8235f02500d594f,
+        type: 3}
     - target: {fileID: 7504850818634894364, guid: 8553d1fdde01ed5448b063d4c1ee1f60,
         type: 3}
       propertyPath: m_LocalPosition.x
