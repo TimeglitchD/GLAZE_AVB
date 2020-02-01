@@ -113,6 +113,7 @@ MonoBehaviour:
     type: 3}
   partPrefab: {fileID: 8282214555292055808, guid: 90e4dd8fd915d82469d6a98615067cfc,
     type: 3}
+  hitClip: {fileID: 8300000, guid: b6d13974942121e48973efe7d8a29067, type: 3}
 --- !u!1 &4300559860104365077
 GameObject:
   m_ObjectHideFlags: 0

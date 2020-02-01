@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] GameObject partPrefab;
     private bool hasDirection = false;
     private bool goBack = false;
+    [SerializeField] AudioClip hitClip;
     GameManager gmc;
 
     // Make the enemy move towards direction
@@ -85,6 +86,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (gmc.getMode() == inputMode.attack)
         {
+            AudioSource.PlayClipAtPoint(hitClip, transform.position);
             gmc.addPoints(10);
             this.gameObject.SetActive(false);
             if(goBack)
