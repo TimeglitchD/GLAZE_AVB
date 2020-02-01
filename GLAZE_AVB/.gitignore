@@ -58,6 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-*.meta
 GLAZE_BUGGY/Library/ArtifactDB
 GLAZE_BUGGY/Library/Artifacts/
