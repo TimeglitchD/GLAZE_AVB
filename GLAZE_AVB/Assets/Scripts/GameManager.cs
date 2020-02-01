@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum inputMode { attack, repair, build }
+public enum gameState {  menu, playing, pause, died }
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;

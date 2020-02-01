@@ -6,7 +6,7 @@ public class PartBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject imgObject;
     private Collider wallcollider;
-
+    [SerializeField] AudioClip Repairclip;
     private bool repairing = false;
     [SerializeField] private float repairTimer = 2f;
     private bool building = false;
@@ -37,6 +37,7 @@ public class PartBehavior : MonoBehaviour
         if(repairing)
         {
             Building(repairTimer);
+            AudioSource.PlayClipAtPoint(Repairclip,transform.position);
         }
         if (building)
         {
