@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 public class PointsDisplay : MonoBehaviour
 {
     GameManager gmc;
@@ -14,6 +14,6 @@ public class PointsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = gmc.getPoints().ToString();
+        GetComponent<Text>().text = gmc.getPoints().ToString();
     }
 }
