@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager _instance;
     [SerializeField]inputMode ModeSelector;
+    
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
     [SerializeField] int Points, Coins, Parts;
+    [SerializeField] int health = 3;
     int timeActive;
     
     // Start is called before the first frame update
@@ -22,6 +24,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1, LoadSceneMode.Additive);  // Load Menu
     }
 
+    public gameState getGameState()
+    {
+        return currentState;
+    }
+    public void setGameState(gameState newState)    
+    {
+        currentState = newState;
+    }
     // Loading the level
     public void LoadLevel()
     {
@@ -122,6 +132,19 @@ public class GameManager : MonoBehaviour
     public void removePart(int value)
     {
         Parts -= value;
+    }
+    // Health stuff
+    public int getHealth()
+    {
+        return health;
+    }
+    public void addHealth(int value)
+    {
+        health += value;
+    }
+    public void removeHealth(int value)
+    {
+        health -= value;
     }
 
     // Update is called once per frame

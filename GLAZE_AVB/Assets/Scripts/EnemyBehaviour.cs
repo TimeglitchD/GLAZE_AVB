@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] GameObject partPrefab;
     private bool hasDirection = false;
     private bool goBack = false;
+    [SerializeField] AudioClip hitClip;
     GameManager gmc;
 
     // Make the enemy move towards direction
@@ -44,7 +45,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("what?");
         if(collision.gameObject.CompareTag("Wall"))
         {
             PartBehavior wallCode = collision.gameObject.GetComponent<PartBehavior>();
@@ -56,7 +56,8 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Core"))
         {
-            Debug.Log("Hits core");
+            gmc.removeHealth(1);
+            this.gameObject.SetActive(false);
         }
     }
     void Move()
@@ -85,6 +86,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (gmc.getMode() == inputMode.attack)
         {
+            AudioSource.PlayClipAtPoint(hitClip, transform.position);
             gmc.addPoints(10);
             this.gameObject.SetActive(false);
             if(goBack)

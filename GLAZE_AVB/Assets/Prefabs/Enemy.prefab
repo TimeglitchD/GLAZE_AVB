@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1032692160010719975}
   - component: {fileID: 1032692160010719972}
   - component: {fileID: 3300351227905154482}
-  - component: {fileID: -3224340791044466791}
+  - component: {fileID: 4025612968528288366}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,7 +114,8 @@ MonoBehaviour:
     type: 3}
   partPrefab: {fileID: 8282214555292055808, guid: 90e4dd8fd915d82469d6a98615067cfc,
     type: 3}
---- !u!114 &-3224340791044466791
+  hitClip: {fileID: 8300000, guid: b6d13974942121e48973efe7d8a29067, type: 3}
+--- !u!114 &4025612968528288366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
