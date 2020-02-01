@@ -14,7 +14,10 @@ public class GameManager : MonoBehaviour
     
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
     [SerializeField] int Points, Coins, Parts;
+    [SerializeField] int coreHealth = 3;
     int timeActive;
+
+    static int levelnr = 5;
     
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     // Loading the level
     public void LoadLevel()
     {
-        StartCoroutine(LoadingLevel(5));
+        StartCoroutine(LoadingLevel(levelnr));
     }
 
     IEnumerator LoadingLevel(int level)
@@ -66,14 +69,14 @@ public class GameManager : MonoBehaviour
     public void EndLevelPauseMenu()
     {
         SceneManager.UnloadSceneAsync(3);
-        StartCoroutine(LoadEndGame(5));
+        StartCoroutine(LoadEndGame(levelnr));
     }
 
     // End level stuff
 
     public void EndLevel()
     {
-        StartCoroutine(LoadEndGame(5));
+        StartCoroutine(LoadEndGame(levelnr));
     }
 
     IEnumerator LoadEndGame(int level)
@@ -131,6 +134,21 @@ public class GameManager : MonoBehaviour
     public void removePart(int value)
     {
         Parts -= value;
+    }
+    // CoreHealth stuff
+    public int getHealth()
+    {
+        return coreHealth;
+    }
+    public void HealthUp(int value)
+    {
+        coreHealth += value;
+    }
+    public void HealthDown(int value)
+    {
+        coreHealth -= value;
+        if (coreHealth <= 0) EndLevel();
+        Debug.Log("Current core health: " + coreHealth);
     }
 
     // Update is called once per frame
