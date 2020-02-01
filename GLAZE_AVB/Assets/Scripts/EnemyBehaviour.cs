@@ -45,7 +45,9 @@ public class EnemyBehaviour : MonoBehaviour
         Debug.Log("what?");
         if(collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("Hits wall");
+            WallBehavior wallCode = collision.gameObject.GetComponent<WallBehavior>();
+            if (wallCode != null) wallCode.StealPart();
+
             goBack = true;
         }
 

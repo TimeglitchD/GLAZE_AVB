@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallBehavior : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
+    private List<PartBehavior> parts = new List<PartBehavior>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,15 @@ public class WallBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BuyComponents()
+    {
+
+    }
+
+    public void RepairComponents()
+    {
+
     }
 }
