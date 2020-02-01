@@ -16,8 +16,9 @@ public class PartBehavior : MonoBehaviour
     [SerializeField] private int buildCost = 3;
     [SerializeField] private int repairCost = 1;
 
-    private int state = 4;
-    [SerializeField] private List<Sprite> states;
+    private int state = 3;
+    private SpriteRenderer sprRenderer;
+    [SerializeField] private List<Sprite> states = new List<Sprite>();
 
     private GameManager gmc;
 
@@ -25,6 +26,8 @@ public class PartBehavior : MonoBehaviour
     void Start()
     {
         wallcollider = gameObject.GetComponent<Collider>();
+        sprRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        sprRenderer.sprite = states[state];
         gmc = FindObjectOfType<GameManager>();
     }
 
@@ -42,11 +45,14 @@ public class PartBehavior : MonoBehaviour
     }
 
     // Enemy steals part
-    public void StealPart()
+    public bool StealPart()
     {
-        imgObject.SetActive(false);
-        wallcollider.enabled = false;
-        Debug.Log("Collide with wall");
+        if (state == 0) return false;
+        state--;
+
+        sprRenderer.sprite = states[state];
+
+        return true;
     }
 
     // Start repairing
@@ -54,7 +60,6 @@ public class PartBehavior : MonoBehaviour
     {
         if (state == 0) return; // If wall needs to be rebuild
 
-        imgObject.SetActive(true);
         wallcollider.isTrigger = false;
 
         // Check if able to repair
@@ -63,7 +68,10 @@ public class PartBehavior : MonoBehaviour
             Debug.Log("Start repairing");
             _timer = 0;
             repairing = true;
-        } else { Debug.Log("Cost too high!"); }
+        }
+        else {
+            Debug.Log("Cost too high!");
+        }
     }
 
     // For buying or recollecting part
@@ -71,7 +79,6 @@ public class PartBehavior : MonoBehaviour
     {
         if (state != 0) return; // If wall needs to be repaired
 
-        imgObject.SetActive(true);
         wallcollider.isTrigger = false;
 
         // Check if able to repair
@@ -88,7 +95,8 @@ public class PartBehavior : MonoBehaviour
         timer += Time.deltaTime;
         if (_timer > timer)
         {
-            imgObject.SetActive(true);
+            state = 3;
+            sprRenderer.sprite = states[state];
             wallcollider.isTrigger = true;
             repairing = false;
         }
