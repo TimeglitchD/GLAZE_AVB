@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PartBehavior : MonoBehaviour
 {
-    [SerializeField] private GameObject imgObject;
     private Collider wallcollider;
     [SerializeField] AudioClip Repairclip;
     private bool repairing = false;
@@ -17,8 +16,11 @@ public class PartBehavior : MonoBehaviour
     [SerializeField] private int repairCost = 1;
 
     private int state = 3;
-    private SpriteRenderer sprRenderer;
-    [SerializeField] private List<Sprite> states = new List<Sprite>();
+
+    [SerializeField] private Sprite sprTrenchFull;
+    [SerializeField] private Sprite sprTrenchBroken;
+    [SerializeField] private SpriteRenderer sprRenderer;
+    [SerializeField] private List<GameObject> antList;
 
     private GameManager gmc;
 
@@ -27,7 +29,7 @@ public class PartBehavior : MonoBehaviour
     {
         wallcollider = gameObject.GetComponent<Collider>();
         sprRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        sprRenderer.sprite = states[state];
+        UpdateState();
         gmc = FindObjectOfType<GameManager>();
     }
 
@@ -44,14 +46,32 @@ public class PartBehavior : MonoBehaviour
         }
     }
 
+    private void UpdateState()
+    {
+        if(state == 0)
+        {
+            sprRenderer.sprite = sprTrenchBroken;
+            for (int i = 0; i < antList.Count; i++)
+            {
+                antList[i].SetActive(false);
+            }
+        }
+        else {
+            for (int i = 0; i < antList.Count; i++)
+            {
+                if ((state-1) >= i) antList[i].SetActive(true);
+                else antList[i].SetActive(false);
+            }
+        }
+    }
+
     // Enemy steals part
     public bool StealPart()
     {
         if (state == 0) return false;
         state--;
 
-        sprRenderer.sprite = states[state];
-        Debug.Log("State: " + state);
+        UpdateState();
 
         return true;
     }
@@ -95,7 +115,7 @@ public class PartBehavior : MonoBehaviour
         {
             Debug.Log("Repaired");
             state = 3;
-            sprRenderer.sprite = states[state];
+            UpdateState();
             wallcollider.isTrigger = true;
             repairing = false;
         }
