@@ -5,15 +5,17 @@ using UnityEngine.UI;
 public class PointsDisplay : MonoBehaviour
 {
     GameManager gmc;
+    Text text;
     // Start is called before the first frame update
     void Start()
     {
         gmc = FindObjectOfType<GameManager>();
+        text = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Text>().text = gmc.getPoints().ToString();
+        text.text = gmc.getPoints().ToString();
     }
 }
