@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool hasDirection = false;
     private bool goBack = false;
     GameManager gmc;
+
     // Make the enemy move towards direction
     public void StartMoving()
     {
@@ -86,8 +87,6 @@ public class EnemyBehaviour : MonoBehaviour
             this.gameObject.SetActive(false);
             Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
         }
-        
-        ///
     }
 
     void SelectSpriteDirection()

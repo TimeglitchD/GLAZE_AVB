@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a0413bfbe1c740b2d3a454f12ef53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.4
   coinPrefab: {fileID: 8520214822111582599, guid: ddd1bfbd9ee800641890b009825d83f7,
     type: 3}
 --- !u!1 &4300559860104365077

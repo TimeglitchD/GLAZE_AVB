@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     public static EnemySpawnManager SpawnEnemyManager;
-
+     
     [SerializeField] private Transform moveEnemyIntoDirection;
     [SerializeField] private Transform enemySpawnPositions;
     private Transform[] spawnPositionsArray;
