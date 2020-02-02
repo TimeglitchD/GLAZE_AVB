@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wasp_IncomingFlyingBack
+  m_Name: Wasp_Carry
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 347943a060871794aa592681ccc89ed9, type: 3}
+      value: {fileID: 21300000, guid: ec3ffd4f0f0b6ef40a3b456e3bae9d7a, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: 8f56a85bf350f164d85c0c19786d98da, type: 3}
+      value: {fileID: 21300000, guid: 77992658aaa0c2a41b2cd5b2a8ef4e83, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 347943a060871794aa592681ccc89ed9, type: 3}
-    - {fileID: 21300000, guid: 8f56a85bf350f164d85c0c19786d98da, type: 3}
+    - {fileID: 21300000, guid: ec3ffd4f0f0b6ef40a3b456e3bae9d7a, type: 3}
+    - {fileID: 21300000, guid: 77992658aaa0c2a41b2cd5b2a8ef4e83, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

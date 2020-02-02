@@ -4,7 +4,7 @@
 public class Billboard : MonoBehaviour
 {
 
-    [SerializeField] bool flip;
+    [SerializeField] public bool flip;
 
     void Update()
     {

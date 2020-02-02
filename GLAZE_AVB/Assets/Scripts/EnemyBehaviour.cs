@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyBehaviour : MonoBehaviour
 {
+
+
     // Adjust the speed for the application.
-    [Range(0.1f,10f)][SerializeField] private float speed = 1.0f;
+    [Range(0.1f, 10f)] [SerializeField] private float speed = 1.0f;
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
+    [SerializeField] GameObject sprite;
+
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject partPrefab;
     private bool hasDirection = false;
-    private bool goBack = false;
+    public bool goBack = false;
     [SerializeField] AudioClip hitClip;
     GameManager gmc;
 
     // Make the enemy move towards direction
     public void StartMoving()
     {
-       
+
     }
 
     private void Start()
     {
-       //position on start is start position
+        //position on start is start position
         startPosition = transform.position;
         gmc = FindObjectOfType<GameManager>();
+        waspPosition();
     }
     public void SetTarget(Transform target, Transform returnToDirection)
     {
@@ -41,16 +47,20 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         Move();
+
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             PartBehavior wallCode = collision.gameObject.GetComponent<PartBehavior>();
             if (wallCode != null)
             {
-                if (wallCode.StealPart()) goBack = true;
+                if (wallCode.StealPart())
+                {
+                    waspPositionBack();
+                }
             }
         }
 
@@ -80,7 +90,7 @@ public class EnemyBehaviour : MonoBehaviour
             }
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
         }
-        
+
     }
     private void OnMouseDown()
     {
@@ -89,7 +99,7 @@ public class EnemyBehaviour : MonoBehaviour
             AudioSource.PlayClipAtPoint(hitClip, transform.position);
             gmc.addPoints(10);
             this.gameObject.SetActive(false);
-            if(goBack)
+            if (goBack)
             {
                 Instantiate(partPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
             }
@@ -103,5 +113,38 @@ public class EnemyBehaviour : MonoBehaviour
     void SelectSpriteDirection()
     {
         //if currentpos lower than 
+    }
+
+    void waspPositionBack()
+    {
+        goBack = true;
+
+        sprite.GetComponent<WaspAnimation>().goBack();
+    }
+
+    void waspPosition()
+    {
+
+        if (0 < startPosition.x && 0 < startPosition.z) //NW
+        {
+            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            Debug.Log("NW");
+
+        }
+        else if (0 > startPosition.x && 0 < startPosition.z) //SW
+        {
+            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            Debug.Log("SW");
+        }
+        else if (0 < startPosition.x && 0 > startPosition.z) //NE
+        {
+            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            Debug.Log("NE");
+        }
+        else //SE
+        {
+            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            Debug.Log("SE");
+        }
     }
 }
