@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     private List<PartBehavior> wallbehaviorCodes;
     public PartBehavior getBehavior(int index) { return wallbehaviorCodes[index]; }
 
+    [SerializeField] private List<Round> rounds = new List<Round>();
+    public List<Round> getRoundsList() { return rounds; }
+
     private void Awake()
     {
         

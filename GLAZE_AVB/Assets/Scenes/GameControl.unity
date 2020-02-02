@@ -148,8 +148,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5429819085111495143, guid: 19a2852bb0b90ce47bde65398117f350,
         type: 3}
+      propertyPath: rounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429819085111495143, guid: 19a2852bb0b90ce47bde65398117f350,
+        type: 3}
       propertyPath: health
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429819085111495143, guid: 19a2852bb0b90ce47bde65398117f350,
+        type: 3}
+      propertyPath: rounds.Array.data[0].basicEnemies
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429819085111495143, guid: 19a2852bb0b90ce47bde65398117f350,
+        type: 3}
+      propertyPath: rounds.Array.data[1].basicEnemies
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429819085111495143, guid: 19a2852bb0b90ce47bde65398117f350,
+        type: 3}
+      propertyPath: rounds.Array.data[2].basicEnemies
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5946224576534182136, guid: 19a2852bb0b90ce47bde65398117f350,
         type: 3}

@@ -101,7 +101,7 @@ public class CannonBehavior : MonoBehaviour
     // Start repairing
     public void RepairPart()
     {
-        if (state == 0) return; // If wall needs to be rebuild
+        if (state == 0 || state == 3) return; // If wall needs to be rebuild
 
         wallcollider.isTrigger = false;
 
@@ -135,8 +135,8 @@ public class CannonBehavior : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > timer)
         {
-            if (repairing) Tracker._instance.RepairWall();
-            else Tracker._instance.BuildWall();
+            if (repairing) Tracker._instance.RepairGun();
+            else Tracker._instance.BuildGun();
             state = 3;
             UpdateState();
             wallcollider.isTrigger = true;
