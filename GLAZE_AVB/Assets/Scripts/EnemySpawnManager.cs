@@ -152,7 +152,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         // Setup enemy spawn and return positions
         EnemyBehaviour enemyScript = newBasicEnemy.GetComponent<EnemyBehaviour>();
-        float randomSpeed = Random.Range(0.1f, 1 / rounds[currentRoundNr].enemySpeed);
+        float randomSpeed = Random.Range(0.5f, rounds[currentRoundNr].enemySpeed);
         if (enemyScript != null) enemyScript.SetTarget(moveEnemyIntoDirection, returnPosition,randomSpeed);
 
         enemyPool.Add(newBasicEnemy);
