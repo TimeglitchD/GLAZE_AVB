@@ -110,10 +110,13 @@ public class PartBehavior : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > timer)
         {
+            if (repairing) Tracker._instance.RepairWall();
+            else Tracker._instance.BuildWall();
             state = 3;
             UpdateState();
             wallcollider.isTrigger = true;
             repairing = false;
+            building = false;
         }
     }
 

@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
     }
     public void addCoin(int value)
     {
+        Tracker._instance.CollectCoin();
         Coins += value;
     }
     public void removeCoin(int value)
@@ -162,6 +163,11 @@ public class GameManager : MonoBehaviour
     public void addWorkerPart()
     {
         WorkerParts++;
+    }
+    public void collectWorkerPart()
+    {
+        Tracker._instance.ReturnPart();
+        addWorkerPart();
     }
     // Soldier Part stuff
     public int getSoldierParts()

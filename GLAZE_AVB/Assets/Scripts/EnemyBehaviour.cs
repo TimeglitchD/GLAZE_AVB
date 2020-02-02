@@ -87,6 +87,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (gmc.getMode() == inputMode.attack)
         {
             AudioSource.PlayClipAtPoint(hitClip, transform.position);
+            Tracker._instance.CatchEnemy();
             gmc.addPoints(10);
             this.gameObject.SetActive(false);
             if(goBack)

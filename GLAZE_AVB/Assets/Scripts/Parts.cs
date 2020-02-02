@@ -20,7 +20,7 @@ public class Parts : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        gmc.addWorkerPart();
+        gmc.collectWorkerPart();
         Destroy(this.gameObject);
     }
 }
