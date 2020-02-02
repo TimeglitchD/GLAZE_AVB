@@ -16,7 +16,8 @@ public class EnemySpawnManager : MonoBehaviour
     private int currentEnemyIndex = 0;
     [SerializeField] private GameObject prefabBasicEnemy;
 
-    [SerializeField] private List<Round> rounds = new List<Round>();
+    private GameManager gmc;
+    [SerializeField] private List<Round> rounds;
     private int currentRoundNr = 0;
 
     private float timeBeforeNextEnemy = 1;
@@ -26,6 +27,9 @@ public class EnemySpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gmc = FindObjectOfType<GameManager>();
+        rounds = gmc.getRoundsList();
+
         SpawnEnemyManager = this;
         enemyPool = new List<GameObject>();
 
