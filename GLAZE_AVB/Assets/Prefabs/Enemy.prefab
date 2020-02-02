@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1032692160010719975}
   - component: {fileID: 1032692160010719972}
   - component: {fileID: 3300351227905154482}
-  - component: {fileID: 4025612968528288366}
   - component: {fileID: -6638106856015493776}
   m_Layer: 0
   m_Name: Enemy
@@ -111,23 +110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.4
+  sprite: {fileID: 4300559860104365077}
   coinPrefab: {fileID: 8520214822111582599, guid: ddd1bfbd9ee800641890b009825d83f7,
     type: 3}
   partPrefab: {fileID: 8282214555292055808, guid: 90e4dd8fd915d82469d6a98615067cfc,
     type: 3}
+  goBack: 0
   hitClip: {fileID: 8300000, guid: b6d13974942121e48973efe7d8a29067, type: 3}
---- !u!114 &4025612968528288366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032692160010719973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c607f43dc9509ed4bb7e96f1065d11e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-6638106856015493776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,12 +144,14 @@ GameObject:
   - component: {fileID: 7921327984761308708}
   - component: {fileID: 516799624980940249}
   - component: {fileID: 1533226741893959211}
+  - component: {fileID: 8762091541645815462}
+  - component: {fileID: 9017974446038765914}
   m_Layer: 0
   m_Name: 2DVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7921327984761308708
 Transform:
@@ -239,9 +230,36 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 258dde41294d69947b358665e5df0ca6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8762091541645815462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300559860104365077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607f43dc9509ed4bb7e96f1065d11e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flip: 0
+--- !u!114 &9017974446038765914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300559860104365077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8878444f8be80b498b6ff483e3031c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animation: {fileID: 1533226741893959211}
+  billboard: {fileID: 8762091541645815462}
