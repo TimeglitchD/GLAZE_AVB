@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         timeActive = Mathf.RoundToInt(Time.timeSinceLevelLoad);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);  // Load Menu
+        currentState = gameState.menu;
     }
 
     public gameState getGameState()
@@ -100,20 +101,17 @@ public class GameManager : MonoBehaviour
     }
 
     // Pause menu stuff
-    private bool pause = false;
     public void PauseGame()
     {
-        if (pause) return;
+        if (currentState == gameState.pause) return;
         currentState = gameState.pause;
         SceneManager.LoadScene(3, LoadSceneMode.Additive);
-        pause = true;
     }
 
     public void UnloadPauseMenu()
     {
         currentState = gameState.playing;
         SceneManager.UnloadSceneAsync(3);
-        pause = false;
     }
 
     public void EndLevelPauseMenu()
@@ -166,6 +164,8 @@ public class GameManager : MonoBehaviour
 
         scene = SceneManager.GetSceneByBuildIndex(2);
         if (scene.isLoaded) SceneManager.UnloadSceneAsync(2);
+
+        currentState = gameState.menu;
     }
 
     // input mode
@@ -242,25 +242,28 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (currentState == gameState.playing)
         {
-            ModeSelector = inputMode.repair;
-        }
-        else if(Input.GetKey(KeyCode.D))
-        {
-            ModeSelector = inputMode.build;
-        }
-        else
-        {
-             ModeSelector = inputMode.attack;
+            if (Input.GetKey(KeyCode.R))
+            {
+                ModeSelector = inputMode.repair;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                ModeSelector = inputMode.build;
+            }
+            else
+            {
+                ModeSelector = inputMode.attack;
+            }
+
+            if (Input.GetKey(KeyCode.P))
+            {
+                PauseGame();
+            }
         }
 
-        if(Input.GetKey(KeyCode.P))
-        {
-            PauseGame();
-        }
-
-        if (pause) Time.timeScale = 0;
+        if (currentState == gameState.pause) Time.timeScale = 0;
         else Time.timeScale = 1;
     }
 
