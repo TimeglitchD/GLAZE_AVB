@@ -21,7 +21,9 @@ public class UIHighscoreManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("File not loading");
+            GameObject ui = Instantiate(prefabHighscoreUI, gameObject.transform);
+            HighScoreUI uiCode = ui.GetComponent<HighScoreUI>();
+            if (uiCode != null) uiCode.SetupWithoutHighScore("No Highscores");
         }
     }
 }
