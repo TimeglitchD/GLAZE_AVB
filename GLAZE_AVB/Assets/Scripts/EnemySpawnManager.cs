@@ -122,6 +122,7 @@ public class EnemySpawnManager : MonoBehaviour
         enemyPool.Clear();
 
         // Wait before building new round
+        float randomtime = Random.Range(0.1f, 1/rounds[currentRoundNr].roundSpeed);
         yield return new WaitForSeconds(.2f);
 
         // Spawn the basic enemies of this round
@@ -177,6 +178,8 @@ public class Round
 {
     public string roundName;
     public int basicEnemies;
+    public float roundSpeed;
+    public float enemySpeed;
     [HideInInspector] public int total;
 
     public Round(string name, int id)
