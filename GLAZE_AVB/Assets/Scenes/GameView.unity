@@ -2904,6 +2904,11 @@ PrefabInstance:
       propertyPath: rounds.Array.data[9].enemySpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7717639830276551207, guid: 745265a59f5664f46948495a8bed7a49,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemySpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 745265a59f5664f46948495a8bed7a49, type: 3}
 --- !u!1 &1378149937
