@@ -96,17 +96,23 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (gmc.getMode() == inputMode.attack)
         {
-            AudioSource.PlayClipAtPoint(hitClip, transform.position);
-            gmc.addPoints(10);
-            this.gameObject.SetActive(false);
-            if (goBack)
-            {
-                Instantiate(partPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
-            }
+            EnemyDies();
+        }
+    }
+
+    public void EnemyDies()
+    {
+        AudioSource.PlayClipAtPoint(hitClip, transform.position);
+        Tracker._instance.CatchEnemy();
+        gmc.addPoints(10);
+        this.gameObject.SetActive(false);
+        if (goBack)
+        {
+            Instantiate(partPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(coinPrefab, new Vector3(transform.position.x, 1f, transform.position.z), Quaternion.identity);
         }
     }
 

@@ -26,7 +26,7 @@ public class WorkerStateDisplay : MonoBehaviour
     {
         if (behavior == null) return;
 
-        int state = behavior.getPartState();
+        int state = behavior.State;
 
         if (state == 0) btnBuild.gameObject.SetActive(true);
         else btnBuild.gameObject.SetActive(false);

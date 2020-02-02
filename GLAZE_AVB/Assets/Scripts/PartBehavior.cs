@@ -16,7 +16,14 @@ public class PartBehavior : MonoBehaviour
     private int repaircost = 0;
 
     private int state = 3;
-    public int getPartState() { return state; }
+    public int State
+    {
+        get { return state; }
+        private set {
+            state = value;
+            UpdateState();
+        }
+    }
 
     [SerializeField] private Sprite sprTrenchFull;
     [SerializeField] private Sprite sprTrenchBroken;
@@ -52,12 +59,12 @@ public class PartBehavior : MonoBehaviour
 
     private void UpdateState()
     {
-        if (state == 0) sprRenderer.sprite = sprTrenchBroken;
+        if (State == 0) sprRenderer.sprite = sprTrenchBroken;
         else sprRenderer.sprite = sprTrenchFull;
 
         for (int i = 0; i < antList.Count; i++)
         {
-            if ((state - 1) >= i) antList[i].SetActive(true);
+            if ((State - 1) >= i) antList[i].SetActive(true);
             else antList[i].SetActive(false);
         }
     }
@@ -65,10 +72,8 @@ public class PartBehavior : MonoBehaviour
     // Enemy steals part
     public bool StealPart()
     {
-        if (state == 0) return false;
-        state--;
-
-        UpdateState();
+        if (State == 0) return false;
+        State--;
 
         return true;
     }
@@ -76,7 +81,7 @@ public class PartBehavior : MonoBehaviour
     // Start repairing
     public void RepairPart()
     {
-        if (state == 0) return; // If wall needs to be rebuild
+        if (State == 0 || State == 3) return; // If wall needs to be rebuild
 
         wallcollider.isTrigger = false;
 
@@ -85,6 +90,7 @@ public class PartBehavior : MonoBehaviour
         {
             _timer = 0;
             repairing = true;
+            laststate = State;
             AudioSource.PlayClipAtPoint(Repairclip, transform.position);
         }
     }
@@ -92,7 +98,7 @@ public class PartBehavior : MonoBehaviour
     // For buying or recollecting part
     public void BuildPart()
     {
-        if (state != 0) return; // If wall needs to be repaired
+        if (State != 0) return; // If wall needs to be repaired
 
         wallcollider.isTrigger = false;
 
@@ -101,19 +107,57 @@ public class PartBehavior : MonoBehaviour
         {
             _timer = 0;
             building = true;
+            laststate = State;
         }
     }
 
     // Buy wall
+    float inbetweentimer = .25f;
+    float timebetween = 0;
+    int laststate = 0;
     public void Building(float timer)
     {
         _timer += Time.deltaTime;
+        timebetween += Time.deltaTime;
         if (_timer > timer)
         {
-            state = 3;
-            UpdateState();
+            if (repairing)
+            {
+                Tracker._instance.RepairWall();
+                State = laststate + 1;
+            }
+            else
+            {
+                Tracker._instance.BuildWall();
+                State = 3;
+            }
+            
             wallcollider.isTrigger = true;
             repairing = false;
+            building = false;
+            timebetween = 0;
+        }
+        else if (timebetween > inbetweentimer)
+        {
+            if(repairing)
+            {
+                if(State == laststate) State++;
+                else State = laststate;
+            }
+
+            if (building)
+            {
+                if (State == 0) State = 1;
+                else if (State == 1) State = 2;
+                else if (State == 2)
+                {
+                    if (laststate < 2 && (timer - _timer) > (timer / 2)) State = 1;
+                    else State = 3;
+                }
+                else State = 2;
+            }
+
+            timebetween = 0;
         }
     }
 
