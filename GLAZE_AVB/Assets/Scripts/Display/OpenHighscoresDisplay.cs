@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RetryDisplay : MonoBehaviour
+public class OpenHighscoresDisplay : MonoBehaviour
 {
-    Button btnRetryGame;
+    Button btnOpenScreen;
     GameManager gmc;
 
     // Start is called before the first frame update
     void Start()
     {
-        btnRetryGame = gameObject.GetComponent<Button>();
-        btnRetryGame.onClick.AddListener(RetryGame);
+        btnOpenScreen = gameObject.GetComponent<Button>();
+        btnOpenScreen.onClick.AddListener(LoadHighscoreScreen);
 
         gmc = FindObjectOfType<GameManager>();
     }
 
-    void RetryGame()
+    void LoadHighscoreScreen()
     {
-        gmc.LoadLevel(gmc.getPlayerName());
+        gmc.LoadHighScoreScreen();
     }
 }
