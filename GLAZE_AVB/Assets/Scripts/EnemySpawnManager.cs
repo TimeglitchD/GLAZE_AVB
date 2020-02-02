@@ -123,7 +123,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         // Wait before building new round
         float randomtime = Random.Range(0.1f, 1/rounds[currentRoundNr].roundSpeed);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(randomtime);
 
         // Spawn the basic enemies of this round
         for (int i = 0; i < currentRound.basicEnemies; i++)
@@ -152,7 +152,8 @@ public class EnemySpawnManager : MonoBehaviour
 
         // Setup enemy spawn and return positions
         EnemyBehaviour enemyScript = newBasicEnemy.GetComponent<EnemyBehaviour>();
-        if (enemyScript != null) enemyScript.SetTarget(moveEnemyIntoDirection, returnPosition);
+        float randomSpeed = Random.Range(0.5f, rounds[currentRoundNr].enemySpeed);
+        if (enemyScript != null) enemyScript.SetTarget(moveEnemyIntoDirection, returnPosition,randomSpeed);
 
         enemyPool.Add(newBasicEnemy);
         newBasicEnemy.SetActive(false);

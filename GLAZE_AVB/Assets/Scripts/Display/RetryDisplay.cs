@@ -19,6 +19,6 @@ public class RetryDisplay : MonoBehaviour
 
     void RetryGame()
     {
-        gmc.LoadLevel();
+        gmc.LoadLevel(gmc.getPlayerName());
     }
 }
