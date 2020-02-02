@@ -7,6 +7,8 @@ public enum inputMode { attack, repair, build }
 public enum gameState {  menu, playing, pause, died }
 public class GameManager : MonoBehaviour
 {
+    private string playerName = "";
+    public string getPlayerName() { return playerName; }
     private gameState currentState = gameState.menu;
 
     public static GameManager _instance;
@@ -59,8 +61,14 @@ public class GameManager : MonoBehaviour
         currentState = newState;
     }
     // Loading the level
-    public void LoadLevel()
+    public void LoadLevel(string player)
     {
+        if (player.Equals("Insert your name..."))
+            playerName = "Anonymous";
+        else 
+            playerName = player;
+
+        Debug.Log(playerName + " starts game");
         StartCoroutine(LoadingLevel(5));
     }
 
@@ -131,9 +139,14 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(level);
     }
 
-    public void MainMenuEndLevel()
+    public void OpenMainMenu()
     {
-        SceneManager.UnloadSceneAsync(2);
+        Scene scene = SceneManager.GetSceneByBuildIndex(2);
+        if(scene.isLoaded) SceneManager.UnloadSceneAsync(2);
+
+        scene = SceneManager.GetSceneByBuildIndex(6);
+        if (scene.isLoaded) SceneManager.UnloadSceneAsync(6);
+
         StartCoroutine("LoadMenu");
     }
 
@@ -142,6 +155,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         currentState = gameState.menu;
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
+    }
+
+    public void LoadHighScoreScreen()
+    {
+        SceneManager.LoadScene(6, LoadSceneMode.Additive);
+
+        Scene scene = SceneManager.GetSceneByBuildIndex(1);
+        if (scene.isLoaded) SceneManager.UnloadSceneAsync(1);
+
+        scene = SceneManager.GetSceneByBuildIndex(2);
+        if (scene.isLoaded) SceneManager.UnloadSceneAsync(2);
     }
 
     // input mode

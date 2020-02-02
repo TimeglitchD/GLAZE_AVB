@@ -9,6 +9,8 @@ public class TrackerDisplay : MonoBehaviour
 
     void Start()
     {
+        Tracker._instance.StoreScore();
+
         txtenemy.text = Tracker._instance.ScoreEnemy().ToString();
         txtcoins.text = Tracker._instance.CoinsCollected().ToString();
         txtparts.text = Tracker._instance.PartsReturned().ToString();
@@ -17,8 +19,6 @@ public class TrackerDisplay : MonoBehaviour
         txtrepgun.text = Tracker._instance.GunsRepaired().ToString();
         txtbgun.text = Tracker._instance.GunsBuild().ToString();
         txtRounds.text = Tracker._instance.RoundsSurvived().ToString();
-
-        GameManager gmc = FindObjectOfType<GameManager>();
-        txtScore.text = gmc.getPoints().ToString();
+        txtScore.text = Tracker._instance.ReturnScore().ToString();
     }
 }

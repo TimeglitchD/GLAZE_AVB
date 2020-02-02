@@ -19,6 +19,6 @@ public class MenubtnDisplay : MonoBehaviour
 
     void OpenMenu()
     {
-        gmc.MainMenuEndLevel();
+        gmc.OpenMainMenu();
     }
 }

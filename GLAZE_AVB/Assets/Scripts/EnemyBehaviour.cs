@@ -34,12 +34,13 @@ public class EnemyBehaviour : MonoBehaviour
         gmc = FindObjectOfType<GameManager>();
         waspPosition();
     }
-    public void SetTarget(Transform target, Transform returnToDirection)
+    public void SetTarget(Transform target, Transform returnToDirection,float startspeed)
     {
         // provide the enemy with the target to move to (this gives possibility to diversify direction too)
         // startPosition = returnToDirection.position;
         startPosition = transform.position;
         targetPosition = target.position;
+        speed = startspeed;
         hasDirection = true; //Flag it to go moving if there is a target selected
     }
 
