@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ModeDisplay : MonoBehaviour
+
+public class BuyWorkerDisplay : MonoBehaviour
 {
+    Button btnBuyPart;
     GameManager gmc;
-    Text text;
+
     // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<Text>();
+        btnBuyPart = gameObject.GetComponent<Button>();
+        btnBuyPart.onClick.AddListener(BuyWorkerPart);
+
         gmc = FindObjectOfType<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void BuyWorkerPart()
     {
-        text.text = gmc.getMode().ToString();
+        gmc.BuyWorkerPart();
     }
 }

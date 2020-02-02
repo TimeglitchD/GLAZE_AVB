@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PartsDisplay : MonoBehaviour
+
+public class BuySolderDisplay : MonoBehaviour
 {
+    Button btnBuyPart;
     GameManager gmc;
-    Text text;
+
     // Start is called before the first frame update
     void Start()
     {
+        btnBuyPart = gameObject.GetComponent<Button>();
+        btnBuyPart.onClick.AddListener(BuySoldierPart);
+
         gmc = FindObjectOfType<GameManager>();
-        text = GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void BuySoldierPart()
     {
-        text.text = gmc.getParts().ToString();
+        gmc.BuySoldierPart();
     }
 }

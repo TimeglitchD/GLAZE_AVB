@@ -12,10 +12,11 @@ public class PartBehavior : MonoBehaviour
     [SerializeField] private float buildTimer = 4f;
     private float _timer = 0;
 
-    [SerializeField] private int buildCost = 3;
-    [SerializeField] private int repairCost = 1;
+    private int buildcost = 0;
+    private int repaircost = 0;
 
     private int state = 3;
+    public int getPartState() { return state; }
 
     [SerializeField] private Sprite sprTrenchFull;
     [SerializeField] private Sprite sprTrenchBroken;
@@ -28,9 +29,12 @@ public class PartBehavior : MonoBehaviour
     void Start()
     {
         wallcollider = gameObject.GetComponent<Collider>();
-        sprRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         UpdateState();
+
         gmc = FindObjectOfType<GameManager>();
+
+        buildcost = gmc.getWorkerBuildCost();
+        repaircost = gmc.getWorkerRepairCost();
     }
 
     // Update is called once per frame
@@ -48,20 +52,13 @@ public class PartBehavior : MonoBehaviour
 
     private void UpdateState()
     {
-        if(state == 0)
+        if (state == 0) sprRenderer.sprite = sprTrenchBroken;
+        else sprRenderer.sprite = sprTrenchFull;
+
+        for (int i = 0; i < antList.Count; i++)
         {
-            sprRenderer.sprite = sprTrenchBroken;
-            for (int i = 0; i < antList.Count; i++)
-            {
-                antList[i].SetActive(false);
-            }
-        }
-        else {
-            for (int i = 0; i < antList.Count; i++)
-            {
-                if ((state-1) >= i) antList[i].SetActive(true);
-                else antList[i].SetActive(false);
-            }
+            if ((state - 1) >= i) antList[i].SetActive(true);
+            else antList[i].SetActive(false);
         }
     }
 
@@ -84,7 +81,7 @@ public class PartBehavior : MonoBehaviour
         wallcollider.isTrigger = false;
 
         // Check if able to repair
-        if (Inventory._instance.PayCost(repairCost))
+        if (gmc.PayWorkerCost(repaircost))
         {
             _timer = 0;
             repairing = true;
@@ -100,7 +97,7 @@ public class PartBehavior : MonoBehaviour
         wallcollider.isTrigger = false;
 
         // Check if able to repair
-        if (Inventory._instance.PayCost(buildCost))
+        if (gmc.PayWorkerCost(buildcost))
         {
             _timer = 0;
             building = true;
@@ -113,7 +110,6 @@ public class PartBehavior : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > timer)
         {
-            Debug.Log("Repaired");
             state = 3;
             UpdateState();
             wallcollider.isTrigger = true;
