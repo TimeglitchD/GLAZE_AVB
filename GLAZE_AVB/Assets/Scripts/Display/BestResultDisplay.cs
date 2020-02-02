@@ -15,7 +15,17 @@ public class BestResultDisplay : MonoBehaviour
         gmc = FindObjectOfType<GameManager>();
 
         List<HighScore> listScore = HighscoresManager.Load();
-        HighScore best = listScore[0];
-        text.text = best.getName() + " got " + best.getScore();
+        string txt = "";
+        if(listScore != null)
+        {
+            HighScore best = listScore[0];
+            txt = best.getName() + " got " + best.getScore();
+        }
+        else
+        {
+            txt = "You have not played the game yet!";
+        }
+
+        text.text = txt;
     }
 }
