@@ -139,17 +139,17 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else if (0 > startPosition.x && 0 < startPosition.z) //SW
         {
-            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            sprite.GetComponent<WaspAnimation>().setDirection("SW");
             Debug.Log("SW");
         }
         else if (0 < startPosition.x && 0 > startPosition.z) //NE
         {
-            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            sprite.GetComponent<WaspAnimation>().setDirection("NE");
             Debug.Log("NE");
         }
         else //SE
         {
-            sprite.GetComponent<WaspAnimation>().setDirection("NW");
+            sprite.GetComponent<WaspAnimation>().setDirection("SE");
             Debug.Log("SE");
         }
     }
