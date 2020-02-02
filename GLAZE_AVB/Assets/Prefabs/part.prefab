@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 874909691756955095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.025291488, y: -0.00000007975858, z: 0}
-  m_LocalScale: {x: 5.954376, y: 2.6762538, z: 2.6762538}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8563098801179055733}
   m_RootOrder: 0
@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b7aaa0b8a76a03945b853aefae9526ed, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 067449aaa0a43764e9396f329f7c36c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 813382040b574814184c84509073b32d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2454812256415882249}
   - component: {fileID: 1367294393239206421}
   - component: {fileID: 603107538125450729}
+  - component: {fileID: 9019237807452288956}
   m_Layer: 0
   m_Name: part
   m_TagString: Untagged
@@ -189,4 +190,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
-  rotationSpeed: 5
+--- !u!114 &9019237807452288956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282214555292055808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607f43dc9509ed4bb7e96f1065d11e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flip: 0
