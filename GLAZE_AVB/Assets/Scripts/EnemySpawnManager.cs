@@ -102,6 +102,7 @@ public class EnemySpawnManager : MonoBehaviour
     // Setup the next round
     IEnumerator StartRound()
     {
+        Tracker._instance.SurvivedRound();
         roundstarted = true;
 
         // Find the current round

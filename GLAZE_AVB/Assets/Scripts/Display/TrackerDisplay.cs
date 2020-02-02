@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TrackerDisplay : MonoBehaviour
 {
-    [SerializeField] private Text txtenemy, txtcoins, txtparts, txtrepwall, txtbwall, txtrepgun, txtbgun, txtScore;
+    [SerializeField] private Text txtenemy, txtcoins, txtparts, txtrepwall, txtbwall, txtrepgun, txtbgun, txtRounds, txtScore;
 
     void Start()
     {
@@ -16,6 +16,7 @@ public class TrackerDisplay : MonoBehaviour
         txtbwall.text = Tracker._instance.WallsBuild().ToString();
         txtrepgun.text = Tracker._instance.GunsRepaired().ToString();
         txtbgun.text = Tracker._instance.GunsBuild().ToString();
+        txtRounds.text = Tracker._instance.RoundsSurvived().ToString();
 
         GameManager gmc = FindObjectOfType<GameManager>();
         txtScore.text = gmc.getPoints().ToString();

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
     [SerializeField] int Points, Coins, WorkerParts, SoldierParts;
     [SerializeField] int health = 3;
+    private string endtxt;
     int timeActive;
 
     // Worker stuff
@@ -62,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadingLevel(int level)
     {
+        Tracker._instance.StartGame();
+
         SceneManager.LoadScene(level, LoadSceneMode.Additive);
         yield return new WaitForSeconds(0.5f);
 
@@ -78,7 +81,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(4, LoadSceneMode.Additive);
         currentState = gameState.playing;
-        SceneManager.UnloadSceneAsync(1);
+
+        Scene scene = SceneManager.GetSceneByBuildIndex(1);
+        if(scene.isLoaded) SceneManager.UnloadSceneAsync(1);
+
+        scene = SceneManager.GetSceneByBuildIndex(2);
+        if (scene.isLoaded) SceneManager.UnloadSceneAsync(2);
     }
 
     // Pause menu stuff
@@ -100,14 +108,15 @@ public class GameManager : MonoBehaviour
 
     public void EndLevelPauseMenu()
     {
-        SceneManager.UnloadSceneAsync(3);
-        StartCoroutine(LoadEndGame(5));
+        UnloadPauseMenu();
+        EndLevel("You needed a break!!!");
     }
 
     // End level stuff
 
-    public void EndLevel()
+    public void EndLevel(string endText)
     {
+        endtxt = endText;
         StartCoroutine(LoadEndGame(5));
     }
 
@@ -118,6 +127,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         SceneManager.UnloadSceneAsync(4);
         SceneManager.UnloadSceneAsync(level);
+    }
+
+    public void MainMenuEndLevel()
+    {
+        SceneManager.UnloadSceneAsync(2);
+        StartCoroutine("LoadMenu");
     }
 
     IEnumerator LoadMenu()
@@ -190,6 +205,12 @@ public class GameManager : MonoBehaviour
     public void removeHealth(int value)
     {
         health -= value;
+        if (health <= 0) EndLevel("You died!!!");
+    }
+    // End text for end scene
+    public string getEndText()
+    {
+        return endtxt;
     }
 
     // Update is called once per frame
@@ -208,10 +229,13 @@ public class GameManager : MonoBehaviour
              ModeSelector = inputMode.attack;
         }
 
-        if(Input.GetKey(KeyCode.Escape))
+        if(Input.GetKey(KeyCode.P))
         {
             PauseGame();
         }
+
+        if (pause) Time.timeScale = 0;
+        else Time.timeScale = 1;
     }
 
 

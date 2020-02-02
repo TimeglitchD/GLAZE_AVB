@@ -5,9 +5,7 @@ using UnityEngine;
 public class Tracker : MonoBehaviour
 {
     public static Tracker _instance;
-    private int enemiescaught, coinscollected, partsreturned, wallsrepaired, wallsbuild, gunsrepaired, gunsbuild;
-
-    [SerializeField] private int enemyScore;
+    private int enemiescaught, coinscollected, partsreturned, wallsrepaired, wallsbuild, gunsrepaired, gunsbuild, rounds;
 
     void Awake()
     {
@@ -15,7 +13,7 @@ public class Tracker : MonoBehaviour
     }
 
     // Reset scores
-    void StartGame()
+    public void StartGame()
     {
         enemiescaught = 0;
         coinscollected = 0;
@@ -24,6 +22,7 @@ public class Tracker : MonoBehaviour
         wallsbuild = 0;
         gunsrepaired = 0;
         gunsbuild = 0;
+        rounds = 0;
     }
 
     // Setters
@@ -34,16 +33,15 @@ public class Tracker : MonoBehaviour
     public void BuildWall() { wallsbuild++; }
     public void RepairGun() { gunsrepaired++; }
     public void BuildGun() { gunsbuild++; }
+    public void SurvivedRound() { rounds++; }
 
     // Getters
-    public int ScoreEnemy()
-    {
-        return enemiescaught * enemyScore;
-    }
+    public int ScoreEnemy() { return enemiescaught; }
     public int CoinsCollected() { return coinscollected; }
     public int PartsReturned() { return partsreturned; }
     public int WallsRepaired() { return wallsrepaired; }
     public int WallsBuild() { return wallsbuild; }
     public int GunsRepaired() { return gunsrepaired; }
     public int GunsBuild() { return gunsbuild; }
+    public int RoundsSurvived() { return rounds - 1; }
 }
