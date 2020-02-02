@@ -12,4 +12,9 @@ public class HighScoreUI : MonoBehaviour
         txtName.text = score.getName();
         txtScore.text = score.getScore().ToString();
     }
+
+    public void SetupWithoutHighScore(string text)
+    {
+        txtName.text = text;
+    }
 }
