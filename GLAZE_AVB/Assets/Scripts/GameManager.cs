@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
                 ModeSelector = inputMode.attack;
             }
 
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKey(KeyCode.Escape))
             {
                 PauseGame();
             }
