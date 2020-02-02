@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5946224576534182136}
   - component: {fileID: 5429819085111495143}
+  - component: {fileID: 821454594}
+  - component: {fileID: 821454595}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,6 +45,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2a929f1f4b5ee43931e9744e5f786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ModeSelector: 0
   gameSpeed: 1
   Points: 0
   Coins: 0
+  WorkerParts: 0
+  SoldierParts: 0
+  health: 3
+  workerPartCost: 5
+  workerbuildCost: 3
+  workerrepairCost: 1
+  soldierPartCost: 0
+  soldierBuildCost: 0
+  soldierRepairCost: 0
+  rounds:
+  - roundName: 
+    basicEnemies: 5
+    total: 0
+  - roundName: 
+    basicEnemies: 10
+    total: 0
+  - roundName: 
+    basicEnemies: 15
+    total: 0
+--- !u!114 &821454594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5946224576534182143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e2c721fe888ee419a3cf50311f04bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &821454595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5946224576534182143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d9ce6c4e989014c80ee1827b005b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
