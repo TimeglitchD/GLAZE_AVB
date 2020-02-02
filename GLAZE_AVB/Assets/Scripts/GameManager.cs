@@ -13,9 +13,27 @@ public class GameManager : MonoBehaviour
     [SerializeField]inputMode ModeSelector;
     
     [Range(0f, 2f)] [SerializeField] float gameSpeed=1f;
-    [SerializeField] int Points, Coins, Parts;
+    [SerializeField] int Points, Coins, WorkerParts, SoldierParts;
     [SerializeField] int health = 3;
     int timeActive;
+
+    // Worker stuff
+    [SerializeField] private int workerPartCost = 5;
+    [SerializeField] private int workerbuildCost = 3;
+    public int getWorkerBuildCost() { return workerbuildCost; }
+    [SerializeField] private int workerrepairCost = 1;
+    public int getWorkerRepairCost() { return workerrepairCost; }
+
+    // Solder stuff
+    [SerializeField] private int soldierPartCost = 0;
+    [SerializeField] private int soldierBuildCost = 0;
+    public int getSoldierBuildCost() { return soldierBuildCost; }
+    [SerializeField] private int soldierRepairCost = 0;
+    public int getSoldierRepairCost() { return soldierRepairCost; }
+
+    // To find behavior for UI
+    private List<PartBehavior> wallbehaviorCodes;
+    public PartBehavior getBehavior(int index) { return wallbehaviorCodes[index]; }
 
     private void Awake()
     {
@@ -44,10 +62,22 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadingLevel(int level)
     {
-        SceneManager.LoadScene(4, LoadSceneMode.Additive);
         SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(0.5f);
+
+        // To communicate the walls to the UI
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        wallbehaviorCodes = new List<PartBehavior>();
+        for(int i=0; i<walls.Length; i++)
+        {
+            PartBehavior behavior = walls[i].GetComponent<PartBehavior>();
+            if (behavior != null) wallbehaviorCodes.Add(behavior);
+            Debug.Log(behavior + "Added");
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
         currentState = gameState.playing;
-        yield return new WaitForSeconds(0.2f);
         SceneManager.UnloadSceneAsync(1);
     }
 
@@ -124,18 +154,23 @@ public class GameManager : MonoBehaviour
     {
         Coins -= value;
     }
-    // Part stuff
-    public int getParts()
+    // Worker Part stuff
+    public int getWorkerParts()
     {
-        return Parts;
+        return WorkerParts;
     }
-    public void addPart(int value)
+    public void addWorkerPart()
     {
-        Parts += value;
+        WorkerParts++;
     }
-    public void removePart(int value)
+    // Soldier Part stuff
+    public int getSoldierParts()
     {
-        Parts -= value;
+        return SoldierParts;
+    }
+    public void addSoldierParts(int value)
+    {
+        SoldierParts += value;
     }
     // Health stuff
     public int getHealth()
@@ -171,5 +206,57 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
+    }
+
+
+    // Pay/buy worker stuff
+    public void BuyWorkerPart()
+    {
+        if (Coins >= workerPartCost)
+        {
+            addWorkerPart();
+            removeCoin(workerPartCost);
+        }
+        else
+        {
+            Debug.Log("Not enough coins!");
+        }
+    }
+
+    public bool PayWorkerCost(int cost)
+    {
+        if (cost <= WorkerParts)
+        {
+            WorkerParts -= cost;
+            return true;
+        }
+        Debug.Log("Not enough parts!");
+        return false;
+    }
+
+    // Pay/buy solder stuff
+    public void BuySoldierPart()
+    {
+        Debug.Log("Cannot buy solders yet!!!");
+        return;
+
+        if (Coins >= soldierPartCost)
+        {
+            addWorkerPart();
+            removeCoin(soldierPartCost);
+        }
+        else
+        {
+            Debug.Log("Not enough coins!");
+        }
+    }
+    public bool PaySolderCost(int cost)
+    {
+        if (cost <= SoldierParts)
+        {
+            WorkerParts -= cost;
+            return true;
+        }
+        return false;
     }
 }
