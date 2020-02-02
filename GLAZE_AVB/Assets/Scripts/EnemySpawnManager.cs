@@ -108,7 +108,6 @@ public class EnemySpawnManager : MonoBehaviour
         // Find the current round
         if (currentRoundNr >= rounds.Count) currentRoundNr = 0;
         Round currentRound = rounds[currentRoundNr];
-        Debug.Log("Current round " + currentRoundNr);
 
         // Clean up last round
         foreach(GameObject child in enemyPool)

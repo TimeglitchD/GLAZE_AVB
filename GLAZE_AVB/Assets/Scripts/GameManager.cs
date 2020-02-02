@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
         {
             PartBehavior behavior = walls[i].GetComponent<PartBehavior>();
             if (behavior != null) wallbehaviorCodes.Add(behavior);
-            Debug.Log(behavior + "Added");
         }
 
         yield return new WaitForSeconds(0.5f);
