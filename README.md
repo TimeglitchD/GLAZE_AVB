@@ -1,2 +1,2 @@
 # GLAZE_AVB
-Ants vs Bugs
+Queen of the Hill: A tower defense game.
